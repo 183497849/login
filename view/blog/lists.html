@@ -13,7 +13,7 @@
 <?php if(isset($_SESSION['me']['id'])){
 	echo "你好 {$_SESSION['me']['name']} ";
 	} else{ ?>
-		<a href="index.php?c=UserCenter&a=login">go login</a>
+		<a href="index.php?c=UserCenter&a=login">登录</a>
 		<?php }?>
 <table border="1px" cellspacing="0" cellpadding="0"> 
 	<tr>
@@ -25,14 +25,22 @@
 	<?php foreach($data as $key=>$value) { ?>
 	<tr>
 		<td><?php echo $value['id']; ?></td>
-		<td><?php echo mb_substr($value['content'], 0, 19,'utf8'); ?></td>
+		<td><?php echo mb_substr($value['content'], 0, 19,'utf8'); ?>
+		<a href="index.php?c=Blog&a=info&id=<?php echo $value['id'] ?>">详情</a></td>
 		<td><?php echo $value['user_name']; ?></td>
 	</tr>
 	<?php } ?>
 </table>
-<a href="index.php?c=Blog&a=add">Blogadd</a>
+<div>
+	<ul>
+		<?php for($i=1;$i<=$allPage;$i++) { ?>
+		<li><a href="index.php?c=Blog&a=lists&p=<?php echo $i; ?>"><?php echo $i ?></a></li>
+		<?php } ?>
+	</ul>
+</div>
+<a href="index.php?c=Blog&a=add">添加博客</a>
 
-<a href="index.php?c=UserCenter&a=logout">logout</a>
+<a href="index.php?c=UserCenter&a=logout">注销登录</a>
 
 </body>
 </html>

@@ -50,4 +50,5 @@
 			$data = $res->fetch_all(MYSQL_ASSOC);
 			return $data[0];
 		}
+		
 	 }

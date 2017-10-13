@@ -1,7 +1,7 @@
 <?php
 	header("Content-type: text/html; charset=utf-8");
-	$controller = isset($_GET['c']) ? $_GET['c'] : 'User';
-	$action 	= isset($_GET['a']) ? $_GET['a'] : 'add';
+	$controller = isset($_GET['c']) ? $_GET['c'] : 'Blog';
+	$action 	= isset($_GET['a']) ? $_GET['a'] : 'lists';
 	session_start();
 	function __autoload($class) {
 		if (strpos($class, "Controller") !== false) {

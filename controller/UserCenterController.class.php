@@ -16,7 +16,7 @@
 				echo '登录成功';
 				die();
 			}else {
-				header('Refresh:30,Url=index.php?c=UserCenter&a=login');
+				header('Refresh:3,Url=index.php?c=UserCenter&a=login');
 				echo '登录不成功';
 				die();
 			}
@@ -25,7 +25,7 @@
 		public function logout () {
 			unset($_SESSION['me']);
 			header('Refresh:3,Url=index.php?c=Blog&a=lists');
-			echo 'logout';
+			echo '退出登录成功';
 			die();
 		}	
 
@@ -42,7 +42,12 @@
 				die();
 			}
 			$userModel=new UserModel();
-
+			$userInfo=$userModel->getUserInfoByName($name);
+			if(!empty($userInfo)){
+				header('Refresh:3,Url=index.php?c=UserCenter&a=reg');
+				echo '名字重复，注册不成功';
+				die();
+			}
 			$status=$userModel->addUser($name,$age,$password);
 
 			if ($status) {
