@@ -6,8 +6,9 @@
 </head>
 <body>
 <h1>添加段子</h1>
-<form  action="index.php?c=Blog&a=doAdd" method="post">
-
+<form  action="index.php?c=Blog&a=doAdd" method="post" enctype="multipart/form-data">
+	图片1:<input type="file" name="photo">
+	<!-- 图片2:<input type="file" name="image"> -->
 	内容： <textarea name="content" rows="20" cols="100"></textarea>
 	<br>
 	<input type="submit" name="">

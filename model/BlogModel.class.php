@@ -6,14 +6,13 @@
 			$this->mysqli->query('set names utf8');
 		}
 
-		function addBlog($user_id,$content){
-			$sql = "insert into blog(content,user_id) value ('{$content}', {$user_id})";
+		function addBlog($user_id,$content,$image){
+			$sql = "insert into blog(content,user_id,image) value ('{$content}', {$user_id},'{$image}')";
 			$res = $this->mysqli->query($sql);
 			return $res;
 		}
 
-		// function getBlogLists(){
-		
+		// function getBlogLists(){	
 		// 	$sql = "select * from blog";
 		// 	$res = $this->mysqli->query($sql);
 		// 	$data = $res->fetch_all(MYSQL_ASSOC);

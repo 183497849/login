@@ -4,8 +4,8 @@
 		public function __construct(){
 			$this->mysqli = new mysqli("localhost","root","","zhitunew");
 		}
-		public function addUser($name,$age,$password){
-			$sql="insert into user (name,age,password) value ('{$name}','{$age}','{$password}')";
+		public function addUser($name,$age,$password,$image){
+			$sql="insert into user (name,age,password,image) value ('{$name}','{$age}','{$password}','{$image}')";
 			$res=$this->mysqli->query($sql);
 			return $res;
 		}
@@ -41,7 +41,7 @@
 			$sql = "select * from user where name = '{$name}'";
 			$res = $this->mysqli->query($sql);
 			$data = $res->fetch_all(MYSQL_ASSOC);
-			return $data[0];
+			return isset($data[0]) ? $data[0] : array();
 		}
 		function getUserInfoById($id) {
 			$sql = "select * from user where id = {$id}";

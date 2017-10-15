@@ -11,8 +11,9 @@
 </head>
 <body>
 <?php if(isset($_SESSION['me']['id'])){
-	echo "你好 {$_SESSION['me']['name']} ";
-	} else{ ?>
+	echo "你好 {$_SESSION['me']['name']} ";?>
+	<img src="<?php echo $_SESSION['me']['image']; ?>" width="50" height="auto"><br>
+	<?php} else{ ?>
 		<a href="index.php?c=UserCenter&a=login">登录</a>
 		<?php }?>
 <table border="1px" cellspacing="0" cellpadding="0"> 
@@ -20,6 +21,7 @@
 		<td>id</td>
 		<td>content</td>
 		<td>user_id</td>
+		<td>image</td>
 	</tr>
 
 	<?php foreach($data as $key=>$value) { ?>
@@ -28,6 +30,7 @@
 		<td><?php echo mb_substr($value['content'], 0, 19,'utf8'); ?>
 		<a href="index.php?c=Blog&a=info&id=<?php echo $value['id'] ?>">详情</a></td>
 		<td><?php echo $value['user_name']; ?></td>
+		<td><img src="<?php echo $value['image']; ?>" width="100" height="auto" alt="no pic"> </td>
 	</tr>
 	<?php } ?>
 </table>

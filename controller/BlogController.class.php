@@ -12,8 +12,11 @@
 		function doAdd(){
 			$content=$_POST['content'];
 			$user_id=$_SESSION['me']['id'];
+			$upload = L("Upload");
+			$filename = $upload->run('photo');
 			$blogModle=new BlogModel();
-			$status=$blogModle->addBlog($user_id,$content);
+			//$image = $filename;
+			$status=$blogModle->addBlog($user_id,$content,$filename);
 			if($status){
 				header('Location:index.php?c=Blog&a=lists');
 				echo '发布成功，1秒后跳转到list';
@@ -26,7 +29,7 @@
 			$userModel = new UserModel();
 
 			$p = isset($_GET['p']) ? $_GET['p'] : 1;
-			$pageNum = 3;
+			$pageNum = 10;
 			$offset = ($p-1)*$pageNum;
 			$count = $blogModel->getBlogCount();
 			$allPage = ceil($count/$pageNum);
@@ -38,11 +41,24 @@
 			}
 			include "./view/blog/lists.html";
 		}	
+		
 		function info(){
 			$id=$_GET['id'];
 			$blogModle=new BlogModel();
 			$data=$blogModle->getInfo($id);
 			$a=$data['content'];
+			$image = $data['image'];
 			include "./view/user/info.html";
+		}
+
+			public function image(){
+			include "./view/blog/image.html";
+		}
+
+		public function doImage(){
+			$upload = L("Upload");
+			$filename = $upload->run('photo');
+			echo $filename;
+			//echo $upload->returnSize();
 		}
 	}
