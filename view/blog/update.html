@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action="index.php?c=Blog&a=doUpdate" method="post">
+	content:<input type="text" name="content" value="<?php echo $font['content'] ?>"><br>
+	classify:<input type="text" name="classify" value="<?php echo $font['classify'] ?>"><br>
+	title:<input type="text" name="title" value="<?php echo $font['title'] ?>"><br>
+	<input type="hidden" name="id" value="<?php echo $font['id']?>"><br>
+	<input type="submit" name="">
+</form>
+</body>
+</html>

@@ -11,7 +11,8 @@
 			$userModel=new UserModel();
 			if($verifyCode!=$_SESSION['verifyCode']){
 				header('Refresh:3,Url=index.php?c=UserCenter&a=login');
-				echo '验证码错误，登录不成功';	
+				echo '验证码错误，登录不成功';
+				die();	
 			}
 			if (empty($name) || empty($password) || empty($verifyCode)) {
 				header('Refresh:300,Url=index.php?c=UserCenter&a=reg');

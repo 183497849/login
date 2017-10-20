@@ -6,6 +6,8 @@
 				echo "请登录";
 				die();
 			}
+			$classifyModel = new ClassifyModel();
+			$classify = $classifyModel->getLists();//$data
 			include "./view/blog/add.html";	
 		}
 
@@ -14,9 +16,22 @@
 			$user_id=$_SESSION['me']['id'];
 			$upload = L("Upload");
 			$filename = $upload->run('photo');
+			$classify = $_POST['classify'];
+			// var_dump($classify);
+			// die();
+			$title = $_POST['title'];
+			$data = array(
+				'user_id' 	=> $user_id,
+				'content' 	=> $content,				
+				'image' 	=> $filename,
+				'classify' 	=> $classify,
+				'title' 	=> $title,
+				);
+			// var_dump($data);
+			// die();
 			$blogModle=new BlogModel();
 			//$image = $filename;
-			$status=$blogModle->addBlog($user_id,$content,$filename);
+			$status=$blogModle->addBlog($data);
 			if($status){
 				header('Location:index.php?c=Blog&a=lists');
 				echo '发布成功，1秒后跳转到list';
@@ -33,6 +48,8 @@
 			$offset = ($p-1)*$pageNum;
 			$count = $blogModel->getBlogCount();
 			$allPage = ceil($count/$pageNum);
+
+			//$classify = $blogModel->getBlogClassify();
 
 			$data = $blogModel->getBlogLists($offset,$pageNum);
 			foreach ($data as $key => $value) {
@@ -51,7 +68,7 @@
 			include "./view/user/info.html";
 		}
 
-			public function image(){
+		public function image(){
 			include "./view/blog/image.html";
 		}
 
@@ -60,5 +77,39 @@
 			$filename = $upload->run('photo');
 			echo $filename;
 			//echo $upload->returnSize();
+		}
+
+
+		public function update(){
+			$id = $_GET['id'];
+			//$id=$_SESSION['me']['id'];//id 传错了
+			$blogModel = new BlogModel();
+			$font=$blogModel->getBlogUpdate($id);
+			// var_dump($font);
+			// die();
+			include"./view/blog/update.html";
+		}
+
+		public function doupdate(){
+			$id=$_POST['id'];
+			$content=$_POST['content'];
+			$classify=$_POST['classify'];
+			$title=$_POST['title'];
+			// if (empty($name) || empty($age) ||empty($password)) {
+			// 	header('Refresh:3,Url=index.php?c=User&a=lists');
+			// 	echo '参数错误发布失败，3秒后跳转到lists';
+			// 	die();
+			// }
+			$blogModel=new BlogModel();
+			$status=$blogModel->blogUpdate($content,$classify,$title,$id);
+				if ($status) {
+				header('Refresh:1,Url=index.php?c=Blog&a=lists');
+				echo '修改成功,1秒后跳转到lists';
+				die();
+			} else {
+				header('Refresh:3,Url=index.php?c=Blog&a=lsits');
+				echo '修改失败,3秒后跳转到lists';
+				die();
+			}
 		}
 	}

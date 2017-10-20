@@ -22,6 +22,10 @@
 		<td>content</td>
 		<td>user_id</td>
 		<td>image</td>
+		<td>classify</td>
+		<td>title</td>
+		<td>update</td>
+
 	</tr>
 
 	<?php foreach($data as $key=>$value) { ?>
@@ -31,6 +35,9 @@
 		<a href="index.php?c=Blog&a=info&id=<?php echo $value['id'] ?>">详情</a></td>
 		<td><?php echo $value['user_name']; ?></td>
 		<td><img src="<?php echo $value['image']; ?>" width="100" height="auto" alt="no pic"> </td>
+		<td><?php echo $value['classify']; ?></td>
+		<td><?php echo $value['title']; ?></td>
+		<td><a href="index.php?c=Blog&a=update&id=<?php echo $value['id']?>">update</a></td>
 	</tr>
 	<?php } ?>
 </table>
@@ -44,6 +51,8 @@
 <a href="index.php?c=Blog&a=add">添加博客</a>
 
 <a href="index.php?c=UserCenter&a=logout">注销登录</a>
+
+<a href="index.php?c=UserCenter&a=login">登录</a>
 
 </body>
 </html>

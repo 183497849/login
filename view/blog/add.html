@@ -7,10 +7,26 @@
 <body>
 <h1>添加段子</h1>
 <form  action="index.php?c=Blog&a=doAdd" method="post" enctype="multipart/form-data">
-	图片1:<input type="file" name="photo">
-	<!-- 图片2:<input type="file" name="image"> -->
+	标题: <input type="text" name="title">
+	<br>
+	图片:<input type="file" name="photo">
 	内容： <textarea name="content" rows="20" cols="100"></textarea>
 	<br>
+	分类： 
+	<select name="classify">
+		<option>请选择</option>
+		<?php foreach ($classify as $value) { ?>
+		<option disabled="true"><?php echo $value['name']; ?></option>
+			<?php foreach ($value['child'] as $v) { ?>
+			<option value="<?php echo $v['name']; ?>">--<?php echo $v['name']; ?></option>
+			<?php } ?>
+		<?php } ?>
+		<!-- <option value="1">--程序人生</option>
+		<option value="2">--欣赏</option>
+		<option disabled="true">学无止境</option>
+		<option>--心得笔记</option>
+		<option>--网站建设</option> -->
+	</select>
 	<input type="submit" name="">
 </form>
 
