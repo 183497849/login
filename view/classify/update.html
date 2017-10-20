@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>修改博客分类</h1>
+<form action="index.php?c=classify&a=doUpdate" method="post">
+	name:<input type="text" name="name" value="<?php echo $font['name'] ?>"><br>
+	pid:<input type="text" name="pid" value="<?php echo $font['pid'] ?>"><br>
+	<input type="hidden" name="id" value="<?php echo $font['id']?>"><br>
+	<input type="submit" name="">
+</form>
+</body>
+</html>

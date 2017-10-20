@@ -7,7 +7,7 @@
 				die();
 			}
 			$classifyModel = new ClassifyModel();
-			$classify = $classifyModel->getLists();//$data
+			$classify = $classifyModel->getClassifyLists();
 			include "./view/blog/add.html";	
 		}
 
@@ -17,8 +17,6 @@
 			$upload = L("Upload");
 			$filename = $upload->run('photo');
 			$classify = $_POST['classify'];
-			// var_dump($classify);
-			// die();
 			$title = $_POST['title'];
 			$data = array(
 				'user_id' 	=> $user_id,
@@ -27,10 +25,7 @@
 				'classify' 	=> $classify,
 				'title' 	=> $title,
 				);
-			// var_dump($data);
-			// die();
 			$blogModle=new BlogModel();
-			//$image = $filename;
 			$status=$blogModle->addBlog($data);
 			if($status){
 				header('Location:index.php?c=Blog&a=lists');
@@ -44,12 +39,10 @@
 			$userModel = new UserModel();
 
 			$p = isset($_GET['p']) ? $_GET['p'] : 1;
-			$pageNum = 10;
+			$pageNum = 4;
 			$offset = ($p-1)*$pageNum;
 			$count = $blogModel->getBlogCount();
 			$allPage = ceil($count/$pageNum);
-
-			//$classify = $blogModel->getBlogClassify();
 
 			$data = $blogModel->getBlogLists($offset,$pageNum);
 			foreach ($data as $key => $value) {
@@ -76,17 +69,12 @@
 			$upload = L("Upload");
 			$filename = $upload->run('photo');
 			echo $filename;
-			//echo $upload->returnSize();
 		}
-
 
 		public function update(){
 			$id = $_GET['id'];
-			//$id=$_SESSION['me']['id'];//id 传错了
 			$blogModel = new BlogModel();
 			$font=$blogModel->getBlogUpdate($id);
-			// var_dump($font);
-			// die();
 			include"./view/blog/update.html";
 		}
 
@@ -95,11 +83,11 @@
 			$content=$_POST['content'];
 			$classify=$_POST['classify'];
 			$title=$_POST['title'];
-			// if (empty($name) || empty($age) ||empty($password)) {
-			// 	header('Refresh:3,Url=index.php?c=User&a=lists');
-			// 	echo '参数错误发布失败，3秒后跳转到lists';
-			// 	die();
-			// }
+			if (empty($content) || empty($classify) ||empty($title)) {
+				header('Refresh:3,Url=index.php?c=Blog&a=lists');
+				echo '参数错误发布失败，3秒后跳转到lists';
+				die();
+			}
 			$blogModel=new BlogModel();
 			$status=$blogModel->blogUpdate($content,$classify,$title,$id);
 				if ($status) {

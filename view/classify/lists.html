@@ -1,0 +1,34 @@
+<!DOCTYPE html>         
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {width:1000px;margin: 0 auto}
+		table {margin:0 auto;}
+		td {width:100px;text-align:center;}
+	</style>
+</head>
+<body> 
+<h1>博客分类</h1>
+	<table border="1px" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>id</td>
+			<td>分类</td>
+			<td>pid</td> 
+			<td>修改</td>
+			<td>删除</td>     
+		</tr>
+		<?php foreach ($data as $key => $value) { ?>
+			<tr>
+				<td><?php echo $value['id'] ?></td>
+				<td><?php echo $value['name'] ?></td>
+				<td><?php echo $value['pid'] ?></td>
+				<td><a href="index.php?c=classify&a=update&id=<?php echo $value['id']?>" >修改</a></td>
+				<td><a href="index.php?c=classify&a=delete&id=<?php echo $value['id']?>" >删除</a></td>
+			</tr>
+		<?php } ?>
+	</table>
+	<a href="index.php?c=classify&a=classifyAdd">添加</a>
+	<a href="index.php?c=blog&a=lists">返回博客</a>
+</body>
+</html>

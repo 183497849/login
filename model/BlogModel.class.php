@@ -7,20 +7,11 @@
 		}
 
 		function addBlog($data){
-			// var_dump($data);
-			// die();
 			$sql = "insert into blog(user_id,content,image,classify,title) value ({$data['user_id']},'{$data['content']}', '{$data['image']}','{$data['classify']}','{$data['title']}')";
 			
 			$res = $this->mysqli->query($sql);
 			return $res;
 		}
-
-		// function getBlogLists(){	
-		// 	$sql = "select * from blog";
-		// 	$res = $this->mysqli->query($sql);
-		// 	$data = $res->fetch_all(MYSQL_ASSOC);
-		// 	return $data;
-		// }
 
 		function getBlogLists($offset,$limit=20){
 			$sql="select * from blog limit {$offset},{$limit}";
@@ -54,15 +45,11 @@
 			$res=$this->mysqli->query($sql);
 			$data=$res->fetch_all(MYSQL_ASSOC);
 			$font=$data[0];
-			// var_dump($font);
-			// die();
 			return $font;
 		}
 
 		function blogUpdate($content,$classify,$title,$id){
 			$sql="update blog set content='{$content}',classify='{$classify}',title='{$title}' where id={$id}";
-			// var_dump($sql);
-			// die();
 			$res=$this->mysqli->query($sql);
 			return $res;
 		}
