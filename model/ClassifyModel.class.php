@@ -7,8 +7,8 @@
 			$this->mysqli->query('set names utf8');
 		} 
 
-		public function getClassifyLists(){
-			$sql = "select * from classify where pid = 0";
+		public function getClassifyLists($pid=0){
+			$sql = "select * from classify where pid = {$pid}";
 			$res = $this->mysqli->query($sql);
 			$data = $res->fetch_all(MYSQL_ASSOC);
 			foreach ($data as $key => $value) {
@@ -17,7 +17,8 @@
 				$child = $resChild->fetch_all(MYSQL_ASSOC);
 				$data[$key]['child'] = $child;
 			 }
-
+			 // var_dump($data);
+			 // die();
 			return $data;
 		}
 
@@ -39,6 +40,13 @@
 			$data=$res->fetch_all(MYSQL_ASSOC);
 			$font=$data[0];
 			return $font;
+		}
+
+		public function getInfoById($id) {
+			$sql = "select * from classify where id = {$id}";
+			$res = $this->mysqli->query($sql);
+			$data = $res->fetch_all(MYSQL_ASSOC);
+			return isset($data[0]) ? $data[0] : array();
 		}
 		function classifyUpdate($name,$pid,$id){
 			$sql="update classify set name='{$name}',pid='{$pid}' where id={$id}";

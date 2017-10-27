@@ -17,18 +17,25 @@
 			$upload = L("Upload");
 			$filename = $upload->run('photo');
 			$classify = $_POST['classify'];
+			// var_dump($classify);
+			// die();
 			$title = $_POST['title'];
+			// $createtime = time();
+			// $classify_id = $_GET['id'];
+			
 			$data = array(
 				'user_id' 	=> $user_id,
 				'content' 	=> $content,				
 				'image' 	=> $filename,
 				'classify' 	=> $classify,
 				'title' 	=> $title,
+				// 'createtime'=>$createtime,
+				// 'classify_id'=>$classify_id,
 				);
 			$blogModle=new BlogModel();
 			$status=$blogModle->addBlog($data);
 			if($status){
-				header('Location:index.php?c=Blog&a=lists');
+				header('Refresh:3,Url=index.php?c=Blog&a=lists');
 				echo '发布成功，1秒后跳转到list';
 				die();
 			}

@@ -16,14 +16,14 @@
 			}
 			if (empty($name) || empty($password) || empty($verifyCode)) {
 				header('Refresh:300,Url=index.php?c=UserCenter&a=reg');
-				echo '注册不成功';
+				echo '登录不成功';
 				die();
 			}
 			$userInfo=$userModel->getUserInfoByName($name);
 			if($password==$userInfo['password']){
 				unset($userInfo['password']);
 				$_SESSION['me'] = $userInfo;
-				header('Refresh:3,Url=index.php?c=Blog&a=lists');
+				header('Refresh:3,Url=index.php?c=Home&a=index');
 				echo '登录成功';
 				die();
 			}else {
