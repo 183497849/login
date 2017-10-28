@@ -1,10 +1,6 @@
 <?php
-	class BlogModel{
-		public $mysqli;
-		public function __construct(){
-			$this->mysqli = new mysqli("localhost","root","","zhitunew");
-			$this->mysqli->query('set names utf8');
-		}
+	class BlogModel extends Model{
+		
 
 		function addBlog($data){
 			$time = date('Y-m-d H:i:s');
@@ -21,34 +17,34 @@
 			// var_dump($sql);
 			// die();
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
 
 		function getInfo($id){
 			$sql = "select * from blog where id = {$id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data[0];
 		}
 		function getBlogCount(){
 			$sql = "select count(*) as num from blog";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data[0]['num'];
 		}
 
 		function getBlogclassify(){
 			$sql = "select * from classify";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data[0];
 		}
 
 		function getBlogUpdate($id){
 			$sql="select * from blog where id={$id}";
 			$res=$this->mysqli->query($sql);
-			$data=$res->fetch_all(MYSQL_ASSOC);
+			$data=$res->fetch_all(MYSQLI_ASSOC);
 			$font=$data[0];
 			return $font;
 		}
